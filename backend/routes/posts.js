@@ -5,31 +5,31 @@ import nodemailer from "nodemailer";
 
 const router = express.Router();
 
-const sendMail = async (subject, text) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
-    subject,
-    text,
-  });
-};
+// const sendMail = async (subject, text) => {
+//   const transporter = nodemailer.createTransport({
+//     service: "gmail",
+//     auth: {
+//       user: process.env.EMAIL_USER,
+//       pass: process.env.EMAIL_PASS,
+//     },
+//   });
+//   await transporter.sendMail({
+//     from: process.env.EMAIL_USER,
+//     to: process.env.EMAIL_USER,
+//     subject,
+//     text,
+//   });
+// };
 
 // POST /api/posts/submit — contributor submits a post
 router.post("/submit", async (req, res) => {
   try {
     const post = await Post.create(req.body);
 
-    await sendMail(
-      "New Post Submission – ThinkLikeSadique",
-      `New post submitted: "${post.title}" by ${post.submittedBy || "Anonymous"}\n\nReview it in your admin panel.`
-    );
+    // await sendMail(
+    //   "New Post Submission – ThinkLikeSadique",
+    //   `New post submitted: "${post.title}" by ${post.submittedBy || "Anonymous"}\n\nReview it in your admin panel.`
+    // );
 
     res.status(201).json({ message: "Post submitted for review", post });
   } catch (err) {
