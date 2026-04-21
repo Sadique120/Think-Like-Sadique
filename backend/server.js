@@ -10,7 +10,12 @@ connectDB();
 
 const app = express();
 
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://think-like-sadique.vercel.app"
+  ]
+}));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
